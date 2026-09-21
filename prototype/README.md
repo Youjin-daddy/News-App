@@ -9,6 +9,39 @@ of a Unity build because Unity isn't available in this execution
 environment, and the only thing this step needs to validate is **whether
 the loop is fun**, not production code.
 
+## v4: combat-triggered quizzes, town gate route, power-gating, minimap, 3 worlds, race-specific weapons
+
+- **Vocabulary quizzes now only fire during an actual encounter.** The
+  prompt timer only counts up while a monster has aggro'd the hero
+  (`currentEngagement()`), and the difficulty tier is taken from that
+  specific engaged monster's level — not a global timer independent of
+  combat. Wandering with no monster nearby never interrupts you.
+- **A real route back to town**: a Town Gate is drawn as a landmark in the
+  world (near the hero's spawn point); walking into it triggers the return
+  to town automatically, in addition to the instant "🏠 Town" button. The
+  world is also divided into distance-from-gate bands (edge → heart →
+  depths), each raising the base monster level, so the map now has a
+  legible sense of "further in is more dangerous."
+- **Power-gated monsters**: a monster whose level exceeds
+  `player.level + weaponTier + armorTier + bootsTier + 1` is shown greyed
+  out with a 🔒 and never aggros, attacks, or takes damage — directly
+  implementing "you need to level up or gear up before you can fight
+  stronger monsters." Leveling up or buying gear unlocks them live, mid-run.
+- **Minimap** (top-right of the arena) shows the gate, every monster
+  color-coded by quiz difficulty (grey if power-locked), the hero, and the
+  current camera viewport — since the world is now several screens wide.
+- **Three selectable worlds** from the Town hub's "Choose Your
+  Battleground" panel: Whisperwood Forest (Lv.1+), Glimmerglass Dunes
+  desert (Lv.4+), and Tideglass Coast (Lv.7+) — original names/creatures
+  per biome (e.g. desert's Duneworm/Mirage Wraith/Sandfang Jackal, coast's
+  Brinewisp/Tideclaw Crab/Kelpfang Serpent), sharing the same combat/quiz
+  mechanics but with distinct background art, palette, and decorative
+  props (dunes/cacti vs. rocks/kelp vs. trees/grass).
+- **Race-specific weapons and silhouette details**: Elf carries a bow,
+  Dwarf a stubby warhammer, Orc Warrior a wide cleaver plus war-paint and
+  spiked pauldrons, Human a straight sword and a small back shield —
+  instead of every race swinging an identical blade.
+
 ## v3: login, race select, open-world forest, leveling & shop
 
 Adds a full session flow around the combat loop: a name-entry "login"
