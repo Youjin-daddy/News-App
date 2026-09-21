@@ -9,6 +9,37 @@ of a Unity build because Unity isn't available in this execution
 environment, and the only thing this step needs to validate is **whether
 the loop is fun**, not production code.
 
+## v3: login, race select, open-world forest, leveling & shop
+
+Adds a full session flow around the combat loop: a name-entry "login"
+screen, a character-select screen with 4 original playable races (Human,
+Elf, Dwarf, Orc Warrior — original stat spreads and art, not tied to any
+specific existing game or IP), and an open-world Whisperwood the hero
+roams with the joystick (camera follows the hero across a map several
+screens wide, instead of a single fixed arena).
+
+- Monsters are no longer fixed waves: they're scattered through the
+  forest at a level (1–8, drifting with the player's own level) shown as
+  a badge over their head, color-coded by the vocabulary tier they'll
+  quiz on approach (green/gold/red = easy/medium/hard) — directly
+  implementing "word difficulty should scale with monster level" from the
+  GDD's adaptive-difficulty principle (§32).
+- Monsters only aggro (chase/attack) once the hero gets close, so the
+  player chooses which fights to pick rather than being swarmed.
+- Defeating a monster grants XP and gold; enough XP levels the character
+  up (more max HP/attack, per GDD §3's character-level track); a
+  defeated monster respawns elsewhere after a few seconds so the forest
+  stays populated.
+- A "🏠 Town" button returns to a hub screen at any time — shows
+  level/gold/words-learned, and a Blacksmith & Outfitter shop where gold
+  buys Weapon/Armor/Boots upgrade tiers (small, GDD-§11-style item system:
+  each tier is a flat stat bump, gated by cost and by owning the previous
+  tier). Purchases apply the next time you re-enter the forest.
+- Character race sets starting HP/Speed/ATK (Human balanced, Elf fast but
+  fragile, Dwarf slow but tanky, Orc Warrior hard-hitting but slower) —
+  all original silhouettes/palettes, not copies of any specific existing
+  game's character designs.
+
 ## v2: real-time movement (revised from v1's static auto-battler)
 
 The first version was a static, fully automatic battle (no player
